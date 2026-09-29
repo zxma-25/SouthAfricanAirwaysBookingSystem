@@ -36,7 +36,7 @@ public class Passenger
     [StringLength(20)]
     public string? PassportNumber { get; set; }
 
-    // Navigation Properties
+
     public virtual ICollection<Ticket> Tickets { get; set; } = new List<Ticket>();
 }
 
@@ -63,7 +63,6 @@ public class Airport
     [StringLength(100)]
     public string Country { get; set; } = string.Empty;
 
-    // Navigation Properties
     [InverseProperty(nameof(Flight.DepartureAirport))]
     public virtual ICollection<Flight> DepartingFlights { get; set; } = new List<Flight>();
 
@@ -110,7 +109,6 @@ public class Flight
     [StringLength(20)]
     public string Status { get; set; } = "SCHEDULED";
 
-    // Navigation Properties
     [ForeignKey(nameof(DepartureAirportID))]
     public virtual Airport DepartureAirport { get; set; } = null!;
 
@@ -144,7 +142,6 @@ public class Booking
     [StringLength(20)]
     public string Status { get; set; } = "CONFIRMED";
 
-    // Navigation Properties
     public virtual ICollection<Ticket> Tickets { get; set; } = new List<Ticket>();
     public virtual ICollection<Payment> Payments { get; set; } = new List<Payment>();
 }
@@ -187,7 +184,6 @@ public class Ticket
     [Column("issuedDate", TypeName = "datetime2")]
     public DateTime IssuedDate { get; set; } = DateTime.Now;
 
-    // Navigation Properties
     [ForeignKey(nameof(BookingID))]
     public virtual Booking Booking { get; set; } = null!;
 
@@ -227,7 +223,6 @@ public class Payment
     [StringLength(50)]
     public string PaymentStatus { get; set; } = "Pending";
 
-    // Navigation Properties
     [ForeignKey(nameof(BookingID))]
     public virtual Booking Booking { get; set; } = null!;
 }
@@ -247,6 +242,5 @@ public class Aircraft
     [Column("totalSeats")]
     public int TotalSeats { get; set; }
 
-    // Navigation Properties
     public virtual ICollection<Flight> Flights { get; set; } = new List<Flight>();
 }
